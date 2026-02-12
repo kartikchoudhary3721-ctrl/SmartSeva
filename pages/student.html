@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student Tools - SmartSeva</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<h2 class="title">🎓 Student Smart Tools</h2>
+
+<div class="grid">
+
+<div class="tool-card">
+<h3>📚 Homework Helper</h3>
+
+<textarea id="question"
+placeholder="Apna homework question likho..."></textarea>
+
+<button onclick="askAI()">Ask AI</button>
+
+<div id="answer"></div>
+
+</div>
+
+
+<div class="tool-card">
+<h3>📝 Notes Maker</h3>
+<textarea placeholder="Topic likho..."></textarea>
+<button>Create Notes</button>
+</div>
+
+<div class="tool-card">
+<h3>📄 Resume Builder</h3>
+<input type="text" placeholder="Your Name">
+<button>Generate Resume</button>
+</div>
+
+<div class="tool-card">
+<h3>🧮 Calculator</h3>
+<input type="number" placeholder="Number">
+<button>Calculate</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+async function askAI(){
+
+const q = document.getElementById("question").value;
+
+document.getElementById("answer").innerText =
+"AI soch raha hai... 🤖";
+
+const res = await fetch(
+"http://localhost:3000/chat",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({message:q})
+}
+);
+
+const data = await res.json();
+
+document.getElementById("answer").innerText =
+data.reply;
+
+}
+
+</script>
+
+
+</body>
+</html>

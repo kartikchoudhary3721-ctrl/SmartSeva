@@ -1,0 +1,193 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+background:#f8fafc;
+color:#0f172a;
+}
+
+.app{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+/* 🔝 TOPBAR */
+.topbar{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+align-items:center;
+justify-content:space-between;
+margin-bottom:25px;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+}
+
+.topbar input{
+flex:1;
+min-width:180px;
+padding:12px;
+border-radius:10px;
+border:1px solid #e2e8f0;
+background:white;
+font-size:15px;
+}
+
+/* 🔠 TITLE */
+.title{
+margin-bottom:18px;
+font-size:22px;
+font-weight:600;
+}
+
+/* 🧩 GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+/* 🧊 CARD */
+.tool{
+background:white;
+border-radius:16px;
+padding:22px;
+text-decoration:none;
+color:#0f172a;
+box-shadow:0 4px 18px rgba(0,0,0,0.05);
+transition:.25s;
+text-align:center;
+}
+
+.tool span{
+font-size:32px;
+display:block;
+margin-bottom:8px;
+}
+
+.tool p{
+font-size:15px;
+font-weight:500;
+}
+
+.tool:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* 📱 MOBILE */
+@media(max-width:600px){
+
+.app{
+padding:15px;
+}
+
+.logo{
+font-size:20px;
+}
+
+.title{
+font-size:18px;
+}
+
+.tool{
+padding:18px;
+}
+
+}
+
+/* 💻 BIG SCREEN */
+@media(min-width:1200px){
+
+.app{
+max-width:1200px;
+}
+
+.tool{
+padding:30px;
+}
+
+}
+
+/* 📱 BOTTOM NAVIGATION */
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:8px 0;
+border-top:1px solid #e2e8f0;
+box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-item{
+text-decoration:none;
+color:#64748b;
+font-size:13px;
+text-align:center;
+}
+
+.nav-item span{
+display:block;
+font-size:20px;
+}
+
+.nav-item.active{
+color:#2563eb;
+font-weight:600;
+}
+
+/* mobile spacing fix */
+body{
+padding-bottom:70px;
+}
+
+.tool-card{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 4px 18px rgba(0,0,0,0.05);
+}
+
+.tool-card h3{
+margin-bottom:10px;
+}
+
+.tool-card textarea,
+.tool-card input{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:1px solid #e2e8f0;
+}
+
+.tool-card button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+}
+
+
+#answer{
+margin-top:12px;
+padding:12px;
+background:#f1f5f9;
+border-radius:10px;
+font-size:14px;
+}
