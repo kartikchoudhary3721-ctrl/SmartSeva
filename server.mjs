@@ -11,47 +11,55 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("./"));
 
-app.post("/chat", async (req,res)=>{
+// 🔎 startup debug (temporary – baad me hata dena)
+console.log("API KEY FOUND:", process.env.API_KEY ? "YES" : "NO");
 
-const msg = req.body.message;
+app.post("/chat", async (req, res) => {
+  const msg = req.body?.message;
 
-try{
+  if (!msg) {
+    return res.json({ reply: "Message missing" });
+  }
 
-const response = await fetch(
-"https://api.groq.com/openai/v1/chat/completions",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"Authorization":`Bearer ${process.env.API_KEY}`
-},
-body:JSON.stringify({
-model:"llama-3.3-70b-versatile",
-messages:[
-{role:"system",content:"Give detailed answers in simple Hindi"},
-{role:"user",content:msg}
-]
-})
-}
-);
+  try {
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            { role: "system", content: "Give detailed answers in simple Hindi" },
+            { role: "user", content: msg }
+          ]
+        })
+      }
+    );
 
-const data = await response.json();
+    const data = await response.json();
 
-res.json({
-reply:data.choices?.[0]?.message?.content
-|| "No reply"
-});
+    // 🔎 error debug
+    if (!response.ok) {
+      console.log("GROQ ERROR:", data);
+      return res.json({ reply: "AI Error – check API / credits" });
+    }
 
-}catch{
-res.json({reply:"Server Error"});
-}
+    res.json({
+      reply: data.choices?.[0]?.message?.content || "No reply"
+    });
 
+  } catch (err) {
+    console.log("SERVER ERROR:", err);
+    res.json({ reply: "Server Error" });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT,()=>{
-console.log("Server running on port " + PORT);
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
-
-
